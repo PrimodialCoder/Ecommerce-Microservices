@@ -6,7 +6,9 @@
     <project name="order-service" path="$PROJECT_DIR$/../order-service" />
     <project name="product-service" path="$PROJECT_DIR$/../product-service" />
     <project name="user-service" path="$PROJECT_DIR$/../user-service" />
-    <project name="E-Commerce-Microservices" path="$PROJECT_DIR$/.." />
+    <project name="E-Commerce-Microservices" path="$PROJECT_DIR$/..">
+      <vcs id="Git" remoteUrl="https://github.com/PrimodialCoder/Ecommerce-Microservices.git" />
+    </project>
     <option name="workspace" value="true" />
   </component>
 </project>
