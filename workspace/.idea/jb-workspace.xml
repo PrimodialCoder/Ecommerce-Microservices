@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WorkspaceSettings">
+    <project name="inventory-service" path="$PROJECT_DIR$/../inventory-service" />
+    <project name="order-service" path="$PROJECT_DIR$/../order-service" />
+    <project name="order-service" path="$PROJECT_DIR$/../order-service" />
+    <project name="product-service" path="$PROJECT_DIR$/../product-service" />
+    <project name="user-service" path="$PROJECT_DIR$/../user-service" />
+    <project name="E-Commerce-Microservices" path="$PROJECT_DIR$/.." />
+    <option name="workspace" value="true" />
+  </component>
+</project>
