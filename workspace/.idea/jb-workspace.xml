@@ -9,6 +9,8 @@
     <project name="E-Commerce-Microservices" path="$PROJECT_DIR$/..">
       <vcs id="Git" remoteUrl="https://github.com/PrimodialCoder/Ecommerce-Microservices.git" />
     </project>
+    <project name="eureka-server" path="$PROJECT_DIR$/../eureka-server" />
+    <project name="api-gateway" path="$PROJECT_DIR$/../api-gateway" />
     <option name="workspace" value="true" />
   </component>
 </project>

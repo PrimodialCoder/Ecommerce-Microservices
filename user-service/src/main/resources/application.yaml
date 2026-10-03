@@ -1,9 +1,25 @@
 spring:
   application:
     name: user-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce_userdb?useSSL=false
+    username: postgres
+    password: '@TCO7b2dx'
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#  cloud:
+#    config:
+#      enabled: false
 server:
   port: 8081
 app:
   jwt:
     secret: MySuperSecretKeyForJWTGeneration123456789
     expiration: 86400000
+
+eureka:
+  client:
+    service-url:
+        defaultZone: http://localhost:8761/eureka/
