@@ -13,12 +13,23 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final String uplaodDir = System.getProperty("user.dir")+ "uploads/products/";
 
 
     @Override
@@ -108,6 +119,54 @@ public class ProductServiceImpl implements ProductService {
                 maxPrice,
                 categoryId,
                 pageable).map(ProductMapper::toDto);
+    }
+
+    @Override
+    public ProductDto uplaodImage(Long prductId, MultipartFile file) throws IOException {
+        Product existingProduct = productRepository.findById(prductId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + prductId));
+
+        if(file.isEmpty()) {
+            throw new RuntimeException("Image File is empty");
+        }
+
+        long maxFileSize = 2 * 1024 * 1024; // 2MB
+        if(file.getSize() > maxFileSize) {
+            throw new RuntimeException("Image File is too large. Maximum allowed size is 2MB");
+        }
+
+        List<String> allowedExtensions = Arrays.asList("image/jpeg", "image/png", "image/jpg");
+        //mime type check
+        if(!allowedExtensions.contains(file.getContentType())) {
+            throw new RuntimeException("Invalid file type. Only JPEG, PNG and JPG are allowed");
+        }
+
+        String originalFilename = file.getOriginalFilename();
+        if(originalFilename == null || !originalFilename.contains(".")) {
+            throw new RuntimeException("Invalid file name");
+        }
+        String ext = originalFilename.substring(originalFilename.lastIndexOf(".")+1).toLowerCase();
+
+        List<String> allowedExt = List.of("jpeg", "png", "jpg");
+        if(!allowedExt.contains(ext)) {
+            throw new RuntimeException("Invalid file extension. Only JPEG, PNG and JPG are allowed");
+        }
+
+        File folder = new File(uplaodDir);
+
+        if(!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        String newFileName = UUID.randomUUID().toString() + "." + ext;
+        Path filePath = Paths.get(uplaodDir + newFileName);
+        Files.write(filePath, file.getBytes());
+
+        String imageUrl = "/uploads/products/" + newFileName;
+        existingProduct.setImageUrl(imageUrl);
+        Product updatedProduct = productRepository.save(existingProduct);
+        return ProductMapper.toDto(updatedProduct);
+
     }
     // Implement the methods defined in ProductService interface
 }

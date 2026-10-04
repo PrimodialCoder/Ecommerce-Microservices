@@ -2,6 +2,9 @@ package com.ecommerce.product.service;
 
 import com.ecommerce.product.dto.ProductDto;
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 public interface ProductService {
     ProductDto createProduct(ProductDto productDto);
@@ -19,4 +22,6 @@ public interface ProductService {
     Page<ProductDto> filterProducts(Long categoryId, Double minPrice, Double maxPrice, int page, int size);
 
     Page<ProductDto> advanceFilter(String keyword, Long categoryId, Double minPrice, Double maxPrice, int page, int size, String sortBy, String sortDir);
+
+    ProductDto uplaodImage(Long prductId, MultipartFile file) throws IOException;
 }
