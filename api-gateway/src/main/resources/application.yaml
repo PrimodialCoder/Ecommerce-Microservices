@@ -14,9 +14,10 @@ spring:
             - Path=/users/**
           filters:
             - CustomRouteFilter
-app.jwt:
-  secret: MySuperSecretKeyForJWTGeneration123456789
-  expiration: 86400000
+app:
+  jwt:
+    secret: MySuperSecretKeyForJWTGeneration123456789
+    expiration: 86400000
 
 server:
   port: 8080
