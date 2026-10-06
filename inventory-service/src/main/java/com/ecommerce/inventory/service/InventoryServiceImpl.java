@@ -21,16 +21,10 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     public void addInventory(InventoryRequestDto inventoryRequestDto) {
-        inventoryRepository.findBySkuCode(inventoryRequestDto.getSkuCode()).ifPresentOrElse(
-                existingInventory -> {
-                    existingInventory.setQuantity(existingInventory.getQuantity() + inventoryRequestDto.getQuantity());
-                    inventoryRepository.save(existingInventory);
-                },
-                () -> {
-                    Inventory newInventory = InventoryMapper.toEntity(inventoryRequestDto);
-                    inventoryRepository.save(newInventory);
-                }
-        );
+        Inventory inventory = InventoryMapper.toEntity(inventoryRequestDto);
+        inventoryRepository.save(inventory);
     }
+
+
 
 }
