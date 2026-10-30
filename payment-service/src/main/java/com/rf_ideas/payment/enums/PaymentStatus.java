@@ -1,4 +1,4 @@
-package com.rf_ideas.payment.model.enums;
+package com.rf_ideas.payment.enums;
 
 public enum PaymentStatus {
     PENDING,
