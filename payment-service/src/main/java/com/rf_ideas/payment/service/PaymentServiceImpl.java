@@ -43,7 +43,8 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentResponseDto updatePaymentStatus(Long paymentId, PaymentStatusUpdateRequest paymentStatusUpdateRequest) {
         Payment payment = paymentRepository.findById(paymentId).orElseThrow(() -> new PaymentNotFoundException("Payment not found for paymentId: " + paymentId));
         payment.setPaymentStatus(paymentStatusUpdateRequest.getPaymentStatus());
-
+        Payment updatedPayment = paymentRepository.save(payment);
+        return mapToResponse(updatedPayment);
     }
 
     private PaymentResponseDto mapToResponse(Payment payment) {

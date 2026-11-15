@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
         @Index(columnList = "orderId"),
         @Index(columnList = "transactionId")
 })
-@Builder
 public class Payment extends BaseModel {
     @Column(nullable = false)
     private String orderId;
