@@ -1,3 +1,9 @@
 spring:
   application:
     name: payment-service
+
+razorpay:
+  key: rzp_test_xxxx
+  secret: xxxxx
+  webhook-secret: xxxxxxx
+
